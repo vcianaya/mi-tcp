@@ -22,3 +22,5 @@ var server = gps.server(options, function (device, connection) {
         return data;
     });
 });
+// 01->LOGIN
+// 12->PING
