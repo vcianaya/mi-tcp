@@ -138,7 +138,7 @@ var adapter = function (device) {
 
     this.get_ping_data = function (msg_parts) {
         var str = msg_parts.data;
-
+        console.log(str);
         var data = {
             'date': str.substr(0, 12),
             'set_count': str.substr(12, 2),
@@ -149,7 +149,6 @@ var adapter = function (device) {
             'speed': parseInt(str.substr(30, 2), 16),
             'orientation': str.substr(32, 4),
             'lbs': str.substr(36, 16),
-            'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
         };
 
         /*
@@ -170,8 +169,7 @@ var adapter = function (device) {
             latitude: data.latitude,
             longitude: data.longitude,
             speed: data.speed,
-            orientation: data.orientation,
-            device_info: data['device_info'][1]
+            orientation: data.orientation
         };
         return res;
     };
