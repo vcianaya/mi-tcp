@@ -148,7 +148,7 @@ var adapter = function (device) {
             'speed': parseInt(str.substr(30, 2), 16),
             'orientation': str.substr(32, 4),
             'lbs': str.substr(36, 16),
-            'gsm': f.hex2bin(estr.substr(58, 2)),
+            'gsm': f.hex2bin(str.substr(58, 2)),
             'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
             
         };
