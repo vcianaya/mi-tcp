@@ -175,7 +175,8 @@ var adapter = function (device) {
             orientation: data.orientation,
             power_status: data['device_info'][0],
             gps_status: data['device_info'][1],
-            charge_status: data['device_info'][5]
+            charge_status: data['device_info'][5],
+            power : data.power
         };
         return res;
     };
