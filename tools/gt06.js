@@ -20,8 +20,6 @@ var adapter = function (device) {
      return type: login_request, ping, etc.
      *******************************************/
     this.parse_data = function (data) {
-        // data = this.bufferToHexString(data);
-
         data = data.toString('hex');
         var parts = {
             'start': data.substr(0, 4)
@@ -32,7 +30,7 @@ var adapter = function (device) {
             parts['finish'] = data.substr(6 + parts['length'] * 2, 4);
 
             parts['protocal_id'] = data.substr(6, 2);
-
+            //PUEDE ESTAR EL ERROR AQUI POR EL CODIGO HEXADECIMAL
             if (parts['finish'] != '0d0a') {
                 throw 'finish code incorrect!';
             }
@@ -42,7 +40,7 @@ var adapter = function (device) {
                 parts.cmd = 'login_request';
                 parts.action = 'login_request';
             } else if (parts['protocal_id'] == '12') {
-                parts['device_id'] = '';
+                parts['device_id'] = data.substr(8, 16);;
                 parts['data'] = data.substr(8, parts['length'] * 2);
                 parts.cmd = 'ping';
                 parts.action = 'ping';
