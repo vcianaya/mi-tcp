@@ -153,7 +153,7 @@ var adapter = function (device) {
             
         };
         console.log('LLEGE');
-        console.log(f.parse_gps_data(str));
+        console.log(data);
         
         /*
          "device_info"	: f.str_pad(parseInt(str.substr(54,2)).toString(2), 8, 0),
