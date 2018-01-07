@@ -116,9 +116,8 @@ function Device(adapter, connection, gpsServer) {
          orientation, speed, mileage, etc */
 
         _this.do_log('Position received ( ' + gpsData.latitude + ',' + gpsData.longitude + ' )');
-        gpsData.from_cmd = msgParts.cmd;
-        console.log(msgParts);
-        
+        gpsData.from_cmd = msgParts.cmd;        
+        gpsData.vico = gpsData.device_info;        
         _this.emit('ping', gpsData, msgParts);
 
     };
