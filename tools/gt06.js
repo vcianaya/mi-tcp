@@ -40,7 +40,7 @@ var adapter = function (device) {
                 parts.cmd = 'login_request';
                 parts.action = 'login_request';
             } else if (parts['protocal_id'] == '12') {
-                parts['device_id'] = data.substr(8, 16);;
+                parts['device_id'] = '';
                 parts['data'] = data.substr(8, parts['length'] * 2);
                 parts.cmd = 'ping';
                 parts.action = 'ping';

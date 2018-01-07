@@ -7,9 +7,15 @@ var options = {
 
 var server = gps.server(options, function (device, connection) {
     device.on("connected", function (data) {
+        console.log("Soy un nuevo dispositivo queriendo conectarme");
+    });
+    device.on("login_request", function (device_id, msg_parts) {
 
-        console.log("Soy un nuevo dispositivo conectado");
-        return data;
+        console.log('¡Oye! Quiero comenzar a transmitir mi posición. Por favor Acéptame. Me llamo ' + device_id);
+
+        this.login_authorized(true);
+
+        console.log("Ok, " + device_id + ", eres aceptado!");
 
     });
 });
