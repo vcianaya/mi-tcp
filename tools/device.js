@@ -59,9 +59,7 @@ function Device(adapter, connection, gpsServer) {
         }
 
         switch (action) {
-            case 'login_request':
-            console.log('accediendo al login');
-            
+            case 'login_request':                    
                 _this.login_request(msgParts);
                 break;
             case 'ping':
