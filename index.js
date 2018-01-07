@@ -20,7 +20,7 @@ var server = gps.server(options, function (device, connection) {
         contador = contador + 1;
         console.log(data);
         
-        console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getUID() + ")" + "    NRO MESNAJE:  " + contador);        
+        // console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getUID() + ")" + "    NRO MESNAJE:  " + contador);        
         return data;
     });
 });
