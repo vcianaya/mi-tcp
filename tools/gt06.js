@@ -138,7 +138,7 @@ var adapter = function (device) {
 
     this.get_ping_data = function (msg_parts) {
         var str = msg_parts.data;
-        console.log(msg_parts.protocal_id);
+        // console.log(msg_parts.protocal_id);
         var data = {
             'date': str.substr(0, 12),
             'set_count': str.substr(12, 2),
@@ -166,6 +166,7 @@ var adapter = function (device) {
 
 
         res = {
+            protocol_id: msg_parts.protocal_id,
             latitude: data.latitude,
             longitude: data.longitude,
             speed: data.speed,
