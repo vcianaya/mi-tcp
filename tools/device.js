@@ -20,10 +20,7 @@ function Device(adapter, connection, gpsServer) {
     /****************************************
    RECEIVING DATA FROM THE DEVICE
    ****************************************/
-    this.on('data', function (data) {
-        console.log('RECEIVING DATA FROM THE DEVICE');
-        console.log(data);
-        
+    this.on('data', function (data) {       
         
         var msgParts = _this.adapter.parse_data(data);
 
@@ -53,10 +50,8 @@ function Device(adapter, connection, gpsServer) {
 
     this.make_action = function (action, msgParts) {
         //If we're not loged
-        console.log('action:  ' + action);
-        console.log(msgParts);
-
-
+        // console.log('action:  ' + action);
+        // console.log(msgParts);
         if (action !== 'login_request' && !_this.loged) {
             _this.adapter.request_login_to_device();
             _this.do_log(_this.getUID() + ' is trying to \'' + action + '\' but it isn\'t loged. Action wasn\'t executed');
