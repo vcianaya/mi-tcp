@@ -107,8 +107,7 @@ var adapter = function (device) {
         //@TODO: Implement this.
     };
 
-    this.receive_alarm = function (msg_parts) {
-        console.log(msg_parts);
+    this.receive_alarm = function (msg_parts) {        
         var str = msg_parts.data;
 
         var data = {
@@ -132,8 +131,7 @@ var adapter = function (device) {
         data['charge_status'] = data['device_info'][5];
         data['acc_status'] = data['device_info'][6];
         data['defence_status'] = data['device_info'][7];
-        console.log('alert');
-        console.log(data);
+        console.log('alert');        
     };
 
     this.dex_to_degrees = function (dex) {

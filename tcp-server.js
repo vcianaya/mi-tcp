@@ -9,8 +9,6 @@ var contador = 0;
 util.inherits(Server, EventEmitter);
 function Server(opts, callback) {
     if (!(this instanceof Server)) {
-        console.log("LLEGEUE ACA");
-
         return new Server(opts, callback);
     }
     EventEmitter.call(this);
@@ -91,10 +89,7 @@ function Server(opts, callback) {
         if (typeof from === 'undefined') {
             from = 'SERVER';
         }
-
-        msg = '#' + from + ': ' + msg;
-        console.log(msg);
-
+        msg = '#' + from + ': ' + msg;        
     };
     /****************************************
    SOME SETTERS & GETTERS

@@ -14,7 +14,7 @@ function Device(adapter, connection, gpsServer) {
     this.port = connection.port;
     this.name = false;
     this.loged = false;
-    console.log(this.connection);
+    console.log(this.port);
 }
 
 module.exports = Device;
