@@ -16,7 +16,7 @@ function Device(adapter, connection, gpsServer) {
     this.loged = false;
     init();
     /* init */
-    function init() {}
+    function init() { }
     /****************************************
    RECEIVING DATA FROM THE DEVICE
    ****************************************/
@@ -61,6 +61,8 @@ function Device(adapter, connection, gpsServer) {
 
         switch (action) {
             case 'login_request':
+            console.log('accediendo al login');
+            
                 _this.login_request(msgParts);
                 break;
             case 'ping':
