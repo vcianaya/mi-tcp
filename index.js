@@ -17,8 +17,7 @@ var server = gps.server(options, function (device, connection) {
         console.log("Ok, " + device_id + ", eres aceptado!");
     });
     device.on("ping", function (data) {
-        contador = contador + 1;
-        console.log(data);
+        contador = contador + 1;       
         
         console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getName() + ")" + "    NRO MESNAJE:  " + contador);        
         return data;

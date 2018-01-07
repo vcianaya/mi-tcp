@@ -147,13 +147,8 @@ var adapter = function (device) {
             'longitude': this.dex_to_degrees(str.substr(22, 8)),
             'speed': parseInt(str.substr(30, 2), 16),
             'orientation': str.substr(32, 4),
-            'lbs': str.substr(36, 16),
-            'gsm': f.hex2bin(str.substr(58, 2)),
-            'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
-            
-        };
-        console.log('LLEGE');
-        console.log(data);
+            'lbs': str.substr(36, 16),                        
+        };        
         
         /*
          "device_info"	: f.str_pad(parseInt(str.substr(54,2)).toString(2), 8, 0),
@@ -173,9 +168,7 @@ var adapter = function (device) {
             latitude: data.latitude,
             longitude: data.longitude,
             speed: data.speed,
-            orientation: data.orientation,
-            device_info: data.device_info,
-            gsm: data.gsm
+            orientation: data.orientation
         };
         return res;
     };
