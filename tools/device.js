@@ -23,7 +23,8 @@ function Device(adapter, connection, gpsServer) {
     this.on('data', function (data) {       
         
         var msgParts = _this.adapter.parse_data(data);
-
+        console.log(msgParts);
+        
         if (this.getUID() === false && typeof (msgParts.device_id) === 'undefined') {
             throw 'The adapter doesn\'t return the device_id and is not defined';
         }
