@@ -152,7 +152,7 @@ var adapter = function (device) {
             'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
         };
         console.log('LLEGE AQUI');
-        console.log(f.parse_gps_data(msg_parts));
+        console.log(f.parse_gps_data(str));
         
         /*
          "device_info"	: f.str_pad(parseInt(str.substr(54,2)).toString(2), 8, 0),
