@@ -43,7 +43,7 @@ exports.parse_data = function (data) {
 exports.parse_gps_data = function (str) {
     var data = {
         'date': str.substr(0, 6),
-        'availability': str.substr(6, 1),
+        // 'availability': str.substr(6, 1),
         'latitude': gps_minute_to_decimal(parseFloat(str.substr(7, 9))),
         'latitude_i': str.substr(16, 1),
         'longitude': gps_minute_to_decimal(parseFloat(str.substr(17, 9))),
