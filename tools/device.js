@@ -21,6 +21,10 @@ function Device(adapter, connection, gpsServer) {
    RECEIVING DATA FROM THE DEVICE
    ****************************************/
     this.on('data', function (data) {
+        console.log('RECEIVING DATA FROM THE DEVICE');
+        console.log(data);
+        
+        
         var msgParts = _this.adapter.parse_data(data);
 
         if (this.getUID() === false && typeof (msgParts.device_id) === 'undefined') {
