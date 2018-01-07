@@ -102,7 +102,7 @@ var adapter = function (device) {
     };
 
     this.request_login_to_device = function () {
-        //@TODO: Implement this.
+        //@TODO: Implement this. Aqui implementar un metodo login
     };
 
     this.receive_alarm = function (msg_parts) {        

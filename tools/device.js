@@ -72,12 +72,12 @@ function Device(adapter, connection, gpsServer) {
             case 'ping':
                 _this.ping(msgParts);
                 break;
-            case 'alarm':
-                _this.receive_alarm(msgParts);
-                break;
-            case 'other':
-                _this.adapter.run_other(msgParts.cmd, msgParts);
-                break;
+            // case 'alarm':
+            //     _this.receive_alarm(msgParts);
+            //     break;
+            // case 'other':
+            //     _this.adapter.run_other(msgParts.cmd, msgParts);
+            //     break;
         }
     };
 
