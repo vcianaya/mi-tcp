@@ -151,7 +151,9 @@ var adapter = function (device) {
             'gsm': str.substr(58, 2),
             'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
         };
-
+        console.log('LLEGE AQUI');
+        console.log(f.parse_gps_data(str));
+        
         /*
          "device_info"	: f.str_pad(parseInt(str.substr(54,2)).toString(2), 8, 0),
          "power"	        : str.substr(56,2),
