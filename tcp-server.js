@@ -1,12 +1,157 @@
+util = require('util');
+EventEmitter = require('events').EventEmitter;
 net = require('net');
+extend = require('node.extend');
 Device = require('../mi-tcp/tools/device');
+functions = require('./tools/functions');
 var _this = this;
 var contador = 0;
-_this.server = net.createServer(function (connection) {
-    connection.device = new Device("GT06", connection, _this);   
-    connection.on('data', function (data) {
-        contador = contador+1;
-        console.log("TCP SERVER UP  "+contador);
-        console.log(data);
+util.inherits(Server, EventEmitter);
+function Server(opts, callback) {
+    if (!(this instanceof Server)) {
+        console.log("LLEGEUE ACA");
+
+        return new Server(opts, callback);
+    }
+    EventEmitter.call(this);
+    var defaults = {
+        debug: false,
+        port: 8080,
+        device_adapter: false,
+    };
+    this.opts = extend(defaults, opts);
+    var _this = this;
+    this.devices = [];
+    this.server = false;
+    this.availableAdapters = {
+        GT06: './tools/gt06'
+    };
+
+    /****************************
+    ALGUNAS FUNCIONES PARA DEFINIR EL ADAPTADOR
+    *****************************/
+
+    this.setAdapter = function (adapter) {
+        if (typeof adapter.adapter !== 'function') {
+            throw 'El adaptador necesita un método adapter() para iniciar una instancia de este';
+        }
+        this.device_adapter = adapter;
+    };
+
+    this.getAdapter = function () {
+        return this.device_adapter;
+    };
+
+    this.addAdaptar = function (model, Obj) {
+        this.availableAdapters.push(model);
+    };
+
+    this.init = function (cb) {
+        //Set debug
+        _this.setDebug(this.opts.debug);
+
+        /*****************************
+         DEVICE ADAPTER INITIALIZATION
+         ******************************/
+        if (_this.opts.device_adapter === false)
+            throw 'The app don\'t set the device_adapter to use. Which model is sending data to this server?';
+
+        if (typeof _this.opts.device_adapter === 'string') {
+
+            //Check if the selected model has an available adapter registered
+            if (typeof this.availableAdapters[this.opts.device_adapter] === 'undefined')
+                throw 'The class adapter for ' + this.opts.device_adapter + ' doesn\'t exists';
+
+            //Get the adapter
+            var adapterFile = (this.availableAdapters[this.opts.device_adapter]);
+
+            this.setAdapter(require(adapterFile));
+
+        } else {
+            //IF THE APP PASS THE ADEPTER DIRECTLY
+            _this.setAdapter(this.opts.device_adapter);
+        }
+
+        _this.emit('before_init');
+        if (typeof cb === 'function') cb();
+        _this.emit('init');
+
+        /* FINAL INIT MESSAGE */
+        console.log('\n=================================================\nGPS LISTENER running at port ' + _this.opts.port + '\nEXPECTING DEVICE MODEL:  ' + _this.getAdapter().model_name + '\n=================================================\n');
+    };
+
+    this.addAdaptar = function (model, Obj) {
+        this.adapters.push(model);
+    };
+    this.do_log = function (msg, from) {
+        //If debug is disabled, return false
+        if (this.getDebug() === false) return false;
+
+        //If from parameter is not set, default is server.
+        if (typeof from === 'undefined') {
+            from = 'SERVER';
+        }
+
+        msg = '#' + from + ': ' + msg;
+        console.log(msg);
+
+    };
+    /****************************************
+   SOME SETTERS & GETTERS
+   ****************************************/
+    this.setDebug = function (val) {
+        this.debug = (val === true);
+    };
+
+    this.getDebug = function () {
+        return this.debug;
+    };
+
+    //Init app
+    this.init(function () {
+        /*************************************
+         AFTER INITIALIZING THE APP...
+         *************************************/
+        _this.server = net.createServer(function (connection) {
+            //Now we are listening!
+            // connection.setEncoding('hex');
+            //We create an new device and give the an adapter to parse the incomming messages
+            connection.device = new Device(_this.getAdapter(), connection, _this);
+
+            _this.devices.push(connection);
+
+            //Once we receive data...
+            connection.on('data', function (data) {
+                connection.device.emit('data', data);
+            });
+
+            // Remove the device from the list when it leaves
+            connection.on('end', function () {
+                _this.devices.splice(_this.devices.indexOf(connection), 1);
+                connection.device.emit('disconnected');
+            });
+
+            callback(connection.device, connection);
+
+            connection.device.emit('connected');
+        }).listen(opts.port);
     });
-}).listen(5000);
+
+    /* Search a device by ID */
+    this.find_device = function (deviceId) {
+        for (var i in this.devices) {
+            var dev = this.devices[i].device;
+            if (dev.uid === deviceId) {
+                return dev;
+            }
+        }
+        return false;
+    };
+    /* SEND A MESSAGE TO DEVICE ID X */
+    this.send_to = function (deviceId, msg) {
+        var dev = this.find_device(deviceId);
+        dev.send(msg);
+    };    
+    return this;
+}
+exports.server = Server;
