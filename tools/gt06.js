@@ -170,7 +170,8 @@ var adapter = function (device) {
             latitude: data.latitude,
             longitude: data.longitude,
             speed: data.speed,
-            orientation: data.orientation
+            orientation: data.orientation,
+            device_info: data.device_info
         };
         return res;
     };
