@@ -149,6 +149,8 @@ var adapter = function (device) {
             'speed': parseInt(str.substr(30, 2), 16),
             'orientation': str.substr(32, 4),
             'lbs': str.substr(36, 16),
+            'device_info': f.str_pad(parseInt(str.substr(54, 2)).toString(2), 8, 0),
+            'power': str.substr(56, 2),
         };
 
         /*
@@ -170,7 +172,10 @@ var adapter = function (device) {
             latitude: data.latitude,
             longitude: data.longitude,
             speed: data.speed,
-            orientation: data.orientation
+            orientation: data.orientation,
+            power_status: data['device_info'][0],
+            gps_status: data['device_info'][1],
+            charge_status: data['device_info'][5]
         };
         return res;
     };
