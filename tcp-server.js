@@ -1,12 +1,14 @@
 net = require('net');
+var contador = 0;
 net.createServer(function (connection) {
 
    
 
     connection.on('data', function (data) {
-        console.log("TCP SERVER UP");
+        contador = contador+1;
+        console.log("TCP SERVER UP  "+contador);
         console.log(data);
-        
+
     });
 
     // Remove the device from the list when it leaves
