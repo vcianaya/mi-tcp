@@ -21,7 +21,7 @@ var server = gps.server(options, function (device, connection) {
     });
     device.on("ping", function (data) {
         contador = contador + 1;       
-        console.log(app.vico);
+        app.emmit_socket({latitude:data.latitude, longitude:data.longitude});
         console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getName() + ")" + "    NRO MESNAJE:  " + contador);        
         return data;
     });
@@ -33,4 +33,3 @@ var server = gps.server(options, function (device, connection) {
 app.listen(3000,()=>{
     console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO");    
 });
-

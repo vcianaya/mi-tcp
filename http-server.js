@@ -13,6 +13,8 @@ var io = require('socket.io')(http_server);
 io.on('connection', (socket)=>{
     console.log('algien se a connectado');
 });
-http_server.vico = io.sockets.emit('messages', 'data');
+http_server.emmit_socket = (data)=>{
+    io.sockets.emit('messages', data);    
+}
 module.exports = http_server;
 
