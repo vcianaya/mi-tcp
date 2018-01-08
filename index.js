@@ -1,4 +1,6 @@
+'use-strict'
 var gps = require("./tcp-server");
+var app = require('./http-server');
 var options = {
     'debug': false,
     'port': 5000,
@@ -26,3 +28,7 @@ var server = gps.server(options, function (device, connection) {
 });
 // 01->LOGIN
 // 12->PING
+//SERVER HTTP
+app.listen(3000,()=>{
+    console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO"+contador);
+});
