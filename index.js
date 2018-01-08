@@ -30,6 +30,6 @@ var server = gps.server(options, function (device, connection) {
 // 01->LOGIN
 // 12->PING
 //SERVER HTTP
-app.listen(3000,()=>{
-    console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO");    
+var serv=app.listen(3000,()=>{
+    console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO");        
 });
