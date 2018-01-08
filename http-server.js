@@ -9,7 +9,7 @@ app.get('/probando', (req,res)=>{
 });
 
 var http_server = require('http').Server(app);
-var io = require('socket.io')(http_server);
+var io = require('socket.io').listen(http_server);
 io.on('connection', (socket)=>{
     console.log('algien se a connectado');
 });
