@@ -14,7 +14,9 @@ io.on('connection', (socket)=>{
     console.log('algien se a connectado');
 });
 http_server.emmit_socket = (data)=>{
-    io.sockets.emit('messages', data);    
+    io.sockets.emit('messages', data);
+    console.log(data);
+    
 }
 module.exports = http_server;
 
