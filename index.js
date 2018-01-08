@@ -1,6 +1,7 @@
 'use-strict'
 var gps = require("./tcp-server");
 var app = require('./http-server');
+
 var options = {
     'debug': false,
     'port': 5000,
@@ -20,7 +21,7 @@ var server = gps.server(options, function (device, connection) {
     });
     device.on("ping", function (data) {
         contador = contador + 1;       
-        
+        app.vico;
         console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getName() + ")" + "    NRO MESNAJE:  " + contador);        
         return data;
     });
@@ -30,5 +31,6 @@ var server = gps.server(options, function (device, connection) {
 // 12->PING
 //SERVER HTTP
 app.listen(3000,()=>{
-    console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO"+contador);
+    console.log("EL SERVIDOR LOCAL CON NODE Y EXPRESS ESTA CORRIENDO");    
 });
+
