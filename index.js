@@ -21,7 +21,7 @@ var server = gps.server(options, function (device, connection) {
     });
     device.on("ping", function (data) {
         contador = contador + 1;       
-        app.vico;
+        console.log(app.vico);
         console.log("Estoy aquí: " + data.latitude + ", " + data.longitude + " (" + this.getName() + ")" + "    NRO MESNAJE:  " + contador);        
         return data;
     });
